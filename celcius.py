@@ -7,8 +7,13 @@ fahrenheit = np.array([-40,14, 15.8,78.8, 59, 212, 32, 69.8, 86,96.8, 23,69.8,46
 
 #keras es un framework que ahorra codigo al crear las capas
 
-capa = tf.keras.layers.Dense(units=1,input_shape=[1])
-modelo = tf.keras.Sequential([capa])
+#capa = tf.keras.layers.Dense(units=1,input_shape=[1])
+#modelo = tf.keras.Sequential([capa])
+oculta1 = tf.keras.layers.Dense(units=3, input_shape=[1])
+oculta2 = tf.keras.layers.Dense(units=3)
+salida = tf.keras.layers.Dense(units=1)
+modelo = tf.keras.Sequential([oculta1, oculta2 ,salida])
+
 #crear el modelo de la red neuronal
 modelo.compile(
     optimizer = tf.keras.optimizers.Adam(0.1),
@@ -30,3 +35,12 @@ prediccion = float(input())
 resultado = modelo.predict([prediccion])
 
 print("el resultado es " + str(resultado) + "°F")
+
+
+#ver laestructura de la red 
+
+print("ver variables internas del modelo")
+print (oculta1.get_weights())
+print (oculta2.get_weights())
+print (salida.get_weights())
+
